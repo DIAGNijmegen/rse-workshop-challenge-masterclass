@@ -1,0 +1,16 @@
+{
+    "results": [
+        {
+            "my_metric": 1
+        },
+        {
+            "my_metric": 0
+        },
+        {
+            "my_metric": 0
+        }
+    ],
+    "aggregates": {
+        "my_metric": 0.3333333333333333
+    }
+}

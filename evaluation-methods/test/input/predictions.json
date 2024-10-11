@@ -1,0 +1,170 @@
+[
+    {
+        "pk": "87c38e9f-8a7e-4a1b-8a35-0aae7ec5eadf",
+        "inputs": [
+            {
+                "file": null,
+                "image": {
+                    "name": "image_of_felix.png"
+                },
+                "value": null,
+                "interface": {
+                    "slug": "mammal",
+                    "kind": "Image",
+                    "super_kind": "Image",
+                    "relative_path": "images/mammal"
+                }
+            },
+            {
+                "file": null,
+                "image": null,
+                "value": 1,
+                "interface": {
+                    "slug": "age-in-months",
+                    "kind": "Integer",
+                    "super_kind": "Value",
+                    "relative_path": "age-in-months.json"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "file": null,
+                "image": null,
+                "value": 0.7,
+                "interface": {
+                    "slug": "uncertainty-score",
+                    "kind": "Float",
+                    "super_kind": "Value",
+                    "relative_path": "uncertainty-score.json"
+                }
+            },
+            {
+                "file": null,
+                "image": null,
+                "value": "dog",
+                "interface": {
+                    "slug": "cat-or-dog",
+                    "kind": "String",
+                    "super_kind": "Value",
+                    "relative_path": "cat_or_dog.json"
+                }
+            }
+        ],
+        "status": "Succeeded",
+        "started_at": "2023-11-29T10:31:25.691799Z",
+        "completed_at": "2023-11-29T10:31:50.691799Z"
+    },
+    {
+        "pk": "246d1e5c-f0aa-4ee7-ae7b-15a654b53820",
+        "inputs": [
+            {
+                "file": null,
+                "image": {
+                    "name": "image_of_rex.png"
+                },
+                "value": null,
+                "interface": {
+                    "slug": "mammal",
+                    "kind": "Image",
+                    "super_kind": "Image",
+                    "relative_path": "images/mammal"
+                }
+            },
+            {
+                "file": null,
+                "image": null,
+                "value": 10,
+                "interface": {
+                    "slug": "age-in-months",
+                    "kind": "Integer",
+                    "super_kind": "Value",
+                    "relative_path": "age-in-months.json"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "file": null,
+                "image": null,
+                "value": 0.6,
+                "interface": {
+                    "slug": "uncertainty-score",
+                    "kind": "Float",
+                    "super_kind": "Value",
+                    "relative_path": "uncertainty-score.json"
+                }
+            },
+            {
+                "file": null,
+                "image": null,
+                "value": "cat",
+                "interface": {
+                    "slug": "cat-or-dog",
+                    "kind": "String",
+                    "super_kind": "Value",
+                    "relative_path": "cat_or_dog.json"
+                }
+            }
+        ],
+        "status": "Succeeded",
+        "started_at": "2023-11-29T10:31:25.691799Z",
+        "completed_at": "2023-11-29T10:31:50.691799Z"
+    },
+    {
+        "pk": "a0621ef1-febd-44db-a578-251bdf68c03a",
+        "inputs": [
+            {
+                "file": null,
+                "image": {
+                    "name": "image_of_churchhill.png"
+                },
+                "value": null,
+                "interface": {
+                    "slug": "mammal",
+                    "kind": "Image",
+                    "super_kind": "Image",
+                    "relative_path": "images/mammal"
+                }
+            },
+            {
+                "file": null,
+                "image": null,
+                "value": 42,
+                "interface": {
+                    "slug": "age-in-months",
+                    "kind": "Integer",
+                    "super_kind": "Value",
+                    "relative_path": "age-in-months.json"
+                }
+            }
+        ],
+        "outputs": [
+            {
+                "file": null,
+                "image": null,
+                "value": 0.5,
+                "interface": {
+                    "slug": "uncertainty-score",
+                    "kind": "Float",
+                    "super_kind": "Value",
+                    "relative_path": "uncertainty-score.json"
+                }
+            },
+            {
+                "file": null,
+                "image": null,
+                "value": "dog",
+                "interface": {
+                    "slug": "cat-or-dog",
+                    "kind": "String",
+                    "super_kind": "Value",
+                    "relative_path": "cat_or_dog.json"
+                }
+            }
+        ],
+        "status": "Succeeded",
+        "started_at": "2023-11-29T10:31:25.691799Z",
+        "completed_at": "2023-11-29T10:31:50.691799Z"
+    }
+]
