@@ -20,4 +20,8 @@ RUN python -m pip install \
 
 COPY --chown=user:user inference.py /opt/app/
 
+# Just for the workshop; we make every image completely unique. Bad practice.
+ARG BUILD_VERSION
+RUN echo "Build version: $BUILD_VERSION"
+
 ENTRYPOINT ["python", "inference.py"]

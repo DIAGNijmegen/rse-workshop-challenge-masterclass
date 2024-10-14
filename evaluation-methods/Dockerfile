@@ -23,4 +23,8 @@ COPY --chown=user:user evaluate.py /opt/app/
 # Setting this will limit the number of workers used by the evaluate.py
 ENV GRAND_CHALLENGE_MAX_WORKERS=
 
+# Just for the workshop; we make every image completely unique. Bad practice.
+ARG BUILD_VERSION
+RUN echo "Build version: $BUILD_VERSION"
+
 ENTRYPOINT ["python", "evaluate.py"]
