@@ -9,6 +9,7 @@ USER user
 
 WORKDIR /opt/app
 
+COPY --chown=user:user model /opt/app/model/
 COPY --chown=user:user requirements.txt /opt/app/
 
 # You can add any Python dependencies to requirements.txt
