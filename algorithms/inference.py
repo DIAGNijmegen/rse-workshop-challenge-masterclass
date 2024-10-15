@@ -32,13 +32,13 @@ def run():
     input_oct_image = load_image(
         location= Path("/input") / "images" / "oct",
     )
-    # dummy patient metadata that we will ignore
-    # this is just to demonstrate the possibility of having multiple different inputs
+    # Dummy patient metadata which we will ignore
+    # This is just to demonstrate the possibility of having multiple different inputs
     input_age_in_months = load_json_file(
          location=Path("/input") / "age-in-months.json",
     )
 
-    # Process the image, generate predictions
+    # Process inputs and generate predictions:
     # For this example, we will simply convert the image 
     # to a binary mask by applying some thresholding
     output_vessel_segmentation = convert_to_binary_mask(image=input_oct_image)
@@ -59,8 +59,9 @@ def convert_to_binary_mask(*, image):
         gray_image += SimpleITK.VectorIndexSelectionCast(image, i)
     gray_image /= image.GetNumberOfComponentsPerPixel()
 
-    # Apply thresholding, return image with voxel values 
-    # as defined for the output interface on Grand Challenge 
+    # Apply thresholding
+    # the resulting image's voxel values 
+    # need to match those defined for the output interface on Grand Challenge 
     binary_mask = SimpleITK.BinaryThreshold(
         gray_image, 
         lowerThreshold=THRESHOLD, # lower bound of the pixel intensity range that will be considered "inside" the threshold range
@@ -80,7 +81,9 @@ def load_json_file(*, location):
 
 def load_image(*, location):
     # Use SimpleITK to read a file
-    input_files = glob(str(location / "*.tif")) + glob(str(location / "*.tiff")) + glob(str(location / "*.mha"))
+    # The specified image folder will only contain 1 image 
+    # because an algorithm only gets 1 archive item to process at a time
+    input_files = glob(str(location / "*.mha"))
     result = SimpleITK.ReadImage(input_files[0])
     return result
 
