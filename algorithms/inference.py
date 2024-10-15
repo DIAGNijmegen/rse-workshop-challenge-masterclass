@@ -17,6 +17,7 @@ Any container that shows the same behavior will do, this is purely an example of
 
 Happy programming!
 """
+
 import SimpleITK
 import numpy as np
 import json
@@ -35,7 +36,7 @@ def run():
     # Dummy patient metadata which we will ignore
     # This is just to demonstrate the possibility of having multiple different inputs
     input_age_in_months = load_json_file(
-         location=Path("/input") / "age-in-months.json",
+        location=Path("/input") / "age-in-months.json",
     )
 
     # Process inputs and generate predictions:
@@ -48,7 +49,7 @@ def run():
         location=Path("/output") / "images/binary-vessel-segmentation",
         image=output_vessel_segmentation,
     )
-    
+
     return 0
 
 
@@ -75,7 +76,7 @@ def convert_to_binary_mask(*, image):
 
 def load_json_file(*, location):
     # Reads a json file
-    with open(location, 'r') as f:
+    with open(location, "r") as f:
         return json.loads(f.read())
 
 

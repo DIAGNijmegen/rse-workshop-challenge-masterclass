@@ -43,7 +43,7 @@ def process(job):
     location_retinal_vessel_segmentation = get_file_location(
         job_pk=job["pk"],
         values=job["outputs"],
-        slug="retinal-vessel-segmentation",
+        slug="binary-vessel-segmentation",
     )
 
     # Secondly, read the results
