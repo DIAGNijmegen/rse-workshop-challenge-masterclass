@@ -1,6 +1,2 @@
 numpy
-monai
-scikit-learn
-scipy
-scikit-image
 SimpleITK
