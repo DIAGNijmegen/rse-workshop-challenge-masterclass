@@ -14,6 +14,6 @@ fi
 
 # Note: the build-arg is JUST for the workshop
 docker build "$SCRIPT_DIR" \
-  --build-arg BUILD_VERSION=$(date +%s) \ 
+  --build-arg BUILD_VERSION=$(date +%s) \
   --platform=linux/amd64 \
   --tag $DOCKER_TAG 2>&1

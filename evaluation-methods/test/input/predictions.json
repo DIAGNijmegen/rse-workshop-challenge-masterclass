@@ -1,24 +1,24 @@
 [
     {
-        "pk": "87c38e9f-8a7e-4a1b-8a35-0aae7ec5eadf",
+        "pk": "be318b69-aa60-422f-a281-6df95f540949",
         "inputs": [
             {
                 "file": null,
                 "image": {
-                    "name": "image_of_felix.png"
+                    "name": "07_oct_image.tif"
                 },
                 "value": null,
                 "interface": {
-                    "slug": "mammal",
+                    "slug": "oct-image",
                     "kind": "Image",
                     "super_kind": "Image",
-                    "relative_path": "images/mammal"
+                    "relative_path": "images/oct"
                 }
             },
             {
                 "file": null,
                 "image": null,
-                "value": 1,
+                "value": 50,
                 "interface": {
                     "slug": "age-in-months",
                     "kind": "Integer",
@@ -30,24 +30,15 @@
         "outputs": [
             {
                 "file": null,
-                "image": null,
-                "value": 0.7,
+                "image": {
+                    "name": "87619887-7cd9-4806-a4a4-7d295c418480.mha"
+                },
+                "value": null,
                 "interface": {
-                    "slug": "uncertainty-score",
-                    "kind": "Float",
-                    "super_kind": "Value",
-                    "relative_path": "uncertainty-score.json"
-                }
-            },
-            {
-                "file": null,
-                "image": null,
-                "value": "dog",
-                "interface": {
-                    "slug": "cat-or-dog",
-                    "kind": "String",
-                    "super_kind": "Value",
-                    "relative_path": "cat_or_dog.json"
+                    "slug": "retinal-vessel-segmentation",
+                    "kind": "Segmentation",
+                    "super_kind": "Image",
+                    "relative_path": "images/vessel-segmentation"
                 }
             }
         ],
@@ -56,25 +47,25 @@
         "completed_at": "2023-11-29T10:31:50.691799Z"
     },
     {
-        "pk": "246d1e5c-f0aa-4ee7-ae7b-15a654b53820",
+        "pk": "8724c703-f3b0-42df-9e0c-2dd068139b6b",
         "inputs": [
             {
                 "file": null,
                 "image": {
-                    "name": "image_of_rex.png"
+                    "name": "08_oct_image.tif"
                 },
                 "value": null,
                 "interface": {
-                    "slug": "mammal",
+                    "slug": "oct-image",
                     "kind": "Image",
                     "super_kind": "Image",
-                    "relative_path": "images/mammal"
+                    "relative_path": "images/oct"
                 }
             },
             {
                 "file": null,
                 "image": null,
-                "value": 10,
+                "value": 500,
                 "interface": {
                     "slug": "age-in-months",
                     "kind": "Integer",
@@ -86,24 +77,15 @@
         "outputs": [
             {
                 "file": null,
-                "image": null,
-                "value": 0.6,
+                "image": {
+                    "name": "f760fe65-53e9-4d4d-b4b1-2d7377f08c32.mha"
+                },
+                "value": null,
                 "interface": {
-                    "slug": "uncertainty-score",
-                    "kind": "Float",
-                    "super_kind": "Value",
-                    "relative_path": "uncertainty-score.json"
-                }
-            },
-            {
-                "file": null,
-                "image": null,
-                "value": "cat",
-                "interface": {
-                    "slug": "cat-or-dog",
-                    "kind": "String",
-                    "super_kind": "Value",
-                    "relative_path": "cat_or_dog.json"
+                    "slug": "retinal-vessel-segmentation",
+                    "kind": "Segmentation",
+                    "super_kind": "Image",
+                    "relative_path": "images/vessel-segmentation"
                 }
             }
         ],
@@ -112,25 +94,25 @@
         "completed_at": "2023-11-29T10:31:50.691799Z"
     },
     {
-        "pk": "a0621ef1-febd-44db-a578-251bdf68c03a",
+        "pk": "62105f92-6b75-44d9-b13e-b5bb5f47f56a",
         "inputs": [
             {
                 "file": null,
                 "image": {
-                    "name": "image_of_churchhill.png"
+                    "name": "09_oct_image.tif"
                 },
                 "value": null,
                 "interface": {
-                    "slug": "mammal",
+                    "slug": "oct-image",
                     "kind": "Image",
                     "super_kind": "Image",
-                    "relative_path": "images/mammal"
+                    "relative_path": "images/oct"
                 }
             },
             {
                 "file": null,
                 "image": null,
-                "value": 42,
+                "value": 100,
                 "interface": {
                     "slug": "age-in-months",
                     "kind": "Integer",
@@ -142,24 +124,15 @@
         "outputs": [
             {
                 "file": null,
-                "image": null,
-                "value": 0.5,
+                "image": {
+                    "name": "3fb2a46a-210f-46b5-b20f-be2f119e5554.mha"
+                },
+                "value": null,
                 "interface": {
-                    "slug": "uncertainty-score",
-                    "kind": "Float",
-                    "super_kind": "Value",
-                    "relative_path": "uncertainty-score.json"
-                }
-            },
-            {
-                "file": null,
-                "image": null,
-                "value": "dog",
-                "interface": {
-                    "slug": "cat-or-dog",
-                    "kind": "String",
-                    "super_kind": "Value",
-                    "relative_path": "cat_or_dog.json"
+                    "slug": "retinal-vessel-segmentation",
+                    "kind": "Segmentation",
+                    "super_kind": "Image",
+                    "relative_path": "images/vessel-segmentation"
                 }
             }
         ],
