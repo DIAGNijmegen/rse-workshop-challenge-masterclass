@@ -1,18 +1,12 @@
+import json
 import multiprocessing
 import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from multiprocessing import Manager, Process
+import traceback
 
 import psutil
-
-
-class PredictionProcessingError(Exception):
-    def __init__(self, prediction, error):
-        self.prediction = prediction
-        self.error = error
-
-    def __str__(self):
-        return f"Error for prediction {self.prediction}: {self.error}"
+from pprint import pprint
 
 
 def get_max_workers():
@@ -74,10 +68,13 @@ def run_prediction_processing(*, fn, predictions):
             pool_worker.terminate()
 
         for prediction, e in errors:
-            raise PredictionProcessingError(
-                prediction=prediction,
-                error=e,
-            ) from e
+            print("\n")
+            print("ERROR: An error occured when processing the following prediction:")
+            pprint(prediction)
+            print("".join(e))
+
+        if errors:
+            raise SystemExit(1)
 
         return list(results)
 
@@ -104,12 +101,9 @@ def _pool_worker(*, fn, predictions, max_workers, results, errors):
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
         try:
             # Submit the processing tasks of the predictions
-            futures = [
-                executor.submit(fn, prediction) for prediction in predictions
-            ]
+            futures = [executor.submit(fn, prediction) for prediction in predictions]
             future_to_predictions = {
-                future: item
-                for future, item in zip(futures, predictions, strict=True)
+                future: item for future, item in zip(futures, predictions, strict=True)
             }
 
             for future in as_completed(future_to_predictions):
@@ -117,7 +111,9 @@ def _pool_worker(*, fn, predictions, max_workers, results, errors):
                     result = future.result()
                     results.append(result)
                 except Exception as e:
-                    errors.append((future_to_predictions[future], e))
+                    errors.append(
+                        (future_to_predictions[future], traceback.format_exception(e))
+                    )
 
                     if not caught_exception:  # Hard stop
                         caught_exception = True
