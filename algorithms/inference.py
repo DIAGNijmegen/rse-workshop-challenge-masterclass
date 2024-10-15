@@ -63,10 +63,10 @@ def convert_to_binary_mask(*, image):
     # as defined for the output interface on Grand Challenge 
     binary_mask = SimpleITK.BinaryThreshold(
         gray_image, 
-        lowerThreshold=THRESHOLD, 
-        upperThreshold=255, 
-        insideValue=255, 
-        outsideValue=0
+        lowerThreshold=THRESHOLD, # lower bound of the pixel intensity range that will be considered "inside" the threshold range
+        upperThreshold=255, # upper bound of the pixel intensity range that will be considered "inside" the threshold range
+        insideValue=255, # value to assign to pixels that fall within the threshold range
+        outsideValue=0 # value to assign to pixels that fall outside the threshold range
     )
     
     return binary_mask
