@@ -17,10 +17,11 @@ Any container that shows the same behavior will do, this is purely an example of
 
 Happy programming!
 """
+
 import json
 from glob import glob
 import SimpleITK
-import re
+import numpy as np
 import random
 from statistics import mean
 from pathlib import Path
@@ -32,9 +33,6 @@ OUTPUT_DIRECTORY = Path("/output")
 GROUND_TRUTH_DIRECTORY = Path("ground_truth")
 
 
-
-
-
 def process(job):
     """Processes a single algorithm job, looking at the outputs"""
     report = "Processing:\n"
@@ -42,47 +40,50 @@ def process(job):
     report += "\n"
 
     # Firstly, find the location of the results
-    location_uncertainty_score = get_file_location(
-            job_pk=job["pk"],
-            values=job["outputs"],
-            slug="uncertainty-score",
-        )
-    location_cat_or_dog = get_file_location(
-            job_pk=job["pk"],
-            values=job["outputs"],
-            slug="cat-or-dog",
-        )
-    
+    location_retinal_vessel_segmentation = get_file_location(
+        job_pk=job["pk"],
+        values=job["outputs"],
+        slug="retinal-vessel-segmentation",
+    )
 
     # Secondly, read the results
-    result_uncertainty_score = load_json_file(
-        location=location_uncertainty_score,
+    result_retinal_vessel_segmentation = load_image_file(
+        location=location_retinal_vessel_segmentation,
     )
-    result_cat_or_dog = load_json_file(
-        location=location_cat_or_dog,
-    )
-    
-
 
     # Thirdly, retrieve the input file name to match it with your ground truth
-    image_name_mammal = get_image_name(
-            values=job["inputs"],
-            slug="mammal",
+    image_name_oct_image = get_image_name(
+        values=job["inputs"],
+        slug="oct-image",
     )
-    
 
     # Fourthly, load your ground truth
-    ground_truth_cat_or_dog = {
-        "image_of_felix.png": "cat",
-        "image_of_rex.png": "dog",
-        "image_of_churchhill.png": "dog",
-    }[image_name_mammal]
+    matching_ground_truth_filename = {
+        "07_oct_image.tif": "07_vessel_segmentation.mha",
+        "08_oct_image.tif": "08_vessel_segmentation.mha",
+        "09_oct_image.tif": "09_vessel_segmentation.mha",
+    }[image_name_oct_image]
 
+    ground_truth = get_array_from_image(
+        image_path=GROUND_TRUTH_DIRECTORY / matching_ground_truth_filename
+    )
+
+    # Lastly, compare the results to your ground truth and compute some metrics
+
+    # The Dice coefficient (also known as Sørensen–Dice index) is a statistical measure
+    # used to gauge the similarity between two sets of data. In the context of binary
+    # images or segmentation masks, it measures the overlap between two arrays.
+
+    dice = dice_coefficient(ground_truth, result_retinal_vessel_segmentation)
+    report += f"Dice: {dice}"
+
+    print(report)
 
     # Finally, calculate by comparing the ground truth to the actual results
     return {
-        "my_metric": random.choice([1, 0]),
+        "Dice": dice,
     }
+
 
 def main():
     print_inputs()
@@ -100,7 +101,7 @@ def main():
     # We have the results per prediction, we can aggregate over the results and
     # generate an overall score(s) for this submission
     metrics["aggregates"] = {
-        "my_metric": mean(result["my_metric"] for result in metrics["results"])
+        "Dice": mean(result["Dice"] for result in metrics["results"])
     }
 
     # Make sure to save the metrics
@@ -148,16 +149,48 @@ def get_file_location(*, job_pk, values, slug):
     return INPUT_DIRECTORY / job_pk / "output" / relative_path
 
 
-def load_json_file(*, location):
-    # Reads a json file
-    with open(location) as f:
-        return json.loads(f.read())
+def load_image_file(*, location):
+    # Use SimpleITK to read a file
+    input_files = (
+        glob(str(location / "*.tif"))
+        + glob(str(location / "*.tiff"))
+        + glob(str(location / "*.mha"))
+    )
+
+    if len(input_files) != 1:
+        raise RuntimeError(
+            f"Could not load a single images from {location}. "
+            "Ensure either .tif, .tiff or .mha files are present."
+        )
+
+    return get_array_from_image(image_path=input_files[0])
+
+
+def get_array_from_image(image_path):
+    result = SimpleITK.ReadImage(image_path)
+
+    # Convert it to a Numpy array
+    return SimpleITK.GetArrayFromImage(result)
 
 
 def write_metrics(*, metrics):
     # Write a json document used for ranking results on the leaderboard
     with open(OUTPUT_DIRECTORY / "metrics.json", "w") as f:
         f.write(json.dumps(metrics, indent=4))
+
+
+def dice_coefficient(array1, array2):
+    # Ensure the arrays are binary (0 and 1 values)
+    array1 = np.asarray(array1).astype(bool)
+    array2 = np.asarray(array2).astype(bool)
+
+    # Compute the intersection between the two arrays
+    intersection = np.sum(array1 & array2)
+
+    # Compute the Dice coefficient
+    dice = (2.0 * intersection) / (np.sum(array1) + np.sum(array2))
+
+    return dice
 
 
 if __name__ == "__main__":
