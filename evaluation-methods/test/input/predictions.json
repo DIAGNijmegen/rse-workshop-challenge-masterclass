@@ -5,7 +5,7 @@
             {
                 "file": null,
                 "image": {
-                    "name": "07_oct_image.tif"
+                    "name": "11_oct_image.tif"
                 },
                 "value": null,
                 "interface": {
@@ -35,10 +35,10 @@
                 },
                 "value": null,
                 "interface": {
-                    "slug": "retinal-vessel-segmentation",
+                    "slug": "binary-vessel-segmentation",
                     "kind": "Segmentation",
                     "super_kind": "Image",
-                    "relative_path": "images/vessel-segmentation"
+                    "relative_path": "images/binary-vessel-segmentation"
                 }
             }
         ],
@@ -52,7 +52,7 @@
             {
                 "file": null,
                 "image": {
-                    "name": "08_oct_image.tif"
+                    "name": "12_oct_image.tif"
                 },
                 "value": null,
                 "interface": {
@@ -82,10 +82,10 @@
                 },
                 "value": null,
                 "interface": {
-                    "slug": "retinal-vessel-segmentation",
+                    "slug": "binary-vessel-segmentation",
                     "kind": "Segmentation",
                     "super_kind": "Image",
-                    "relative_path": "images/vessel-segmentation"
+                    "relative_path": "images/binary-vessel-segmentation"
                 }
             }
         ],
@@ -99,7 +99,7 @@
             {
                 "file": null,
                 "image": {
-                    "name": "09_oct_image.tif"
+                    "name": "13_oct_image.tif"
                 },
                 "value": null,
                 "interface": {
@@ -129,10 +129,10 @@
                 },
                 "value": null,
                 "interface": {
-                    "slug": "retinal-vessel-segmentation",
+                    "slug": "binary-vessel-segmentation",
                     "kind": "Segmentation",
                     "super_kind": "Image",
-                    "relative_path": "images/vessel-segmentation"
+                    "relative_path": "images/binary-vessel-segmentation"
                 }
             }
         ],

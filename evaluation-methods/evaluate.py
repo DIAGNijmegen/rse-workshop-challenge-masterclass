@@ -43,7 +43,7 @@ def process(job):
     location_retinal_vessel_segmentation = get_file_location(
         job_pk=job["pk"],
         values=job["outputs"],
-        slug="retinal-vessel-segmentation",
+        slug="binary-vessel-segmentation",
     )
 
     # Secondly, read the results
@@ -59,9 +59,9 @@ def process(job):
 
     # Fourthly, load your ground truth
     matching_ground_truth_filename = {
-        "07_oct_image.tif": "07_vessel_segmentation.mha",
-        "08_oct_image.tif": "08_vessel_segmentation.mha",
-        "09_oct_image.tif": "09_vessel_segmentation.mha",
+        "11_oct_image.tif": "01_vessel_segmentation.mha",
+        "12_oct_image.tif": "05_vessel_segmentation.mha",
+        "13_oct_image.tif": "08_vessel_segmentation.mha",
     }[image_name_oct_image]
 
     ground_truth = get_array_from_image(

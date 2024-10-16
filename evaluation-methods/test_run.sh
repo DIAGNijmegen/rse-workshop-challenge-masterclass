@@ -30,15 +30,12 @@ echo "=+= Doing an evaluation"
 ## Note the extra arguments that are passed here:
 # '--network none'
 #    entails there is no internet connection
-# 'gpus all'
-#    enables access to any GPUs present
 # '--volume <NAME>:/tmp'
 #   is added because on Grand Challenge this directory cannot be used to store permanent files
 docker volume create "$DOCKER_NOOP_VOLUME" > /dev/null
 docker run --rm \
     --platform=linux/amd64 \
     --network none \
-    --gpus all \
     --volume "$INPUT_DIR":/input:ro \
     --volume "$OUTPUT_DIR":/output \
     --volume "$DOCKER_NOOP_VOLUME":/tmp \
