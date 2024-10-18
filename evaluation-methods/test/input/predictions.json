@@ -5,14 +5,14 @@
             {
                 "file": null,
                 "image": {
-                    "name": "11_oct_image.tif"
+                    "name": "11_fundus_image.jpg"
                 },
                 "value": null,
                 "interface": {
-                    "slug": "oct-image",
+                    "slug": "color-fundus-image",
                     "kind": "Image",
                     "super_kind": "Image",
-                    "relative_path": "images/oct"
+                    "relative_path": "images/color-fundus"
                 }
             },
             {
@@ -52,14 +52,14 @@
             {
                 "file": null,
                 "image": {
-                    "name": "12_oct_image.tif"
+                    "name": "12_fundus_image.jpg"
                 },
                 "value": null,
                 "interface": {
-                    "slug": "oct-image",
+                    "slug": "color-fundus-image",
                     "kind": "Image",
                     "super_kind": "Image",
-                    "relative_path": "images/oct"
+                    "relative_path": "images/color-fundus"
                 }
             },
             {
@@ -99,14 +99,14 @@
             {
                 "file": null,
                 "image": {
-                    "name": "13_oct_image.tif"
+                    "name": "13_fundus_image.jpg"
                 },
                 "value": null,
                 "interface": {
-                    "slug": "oct-image",
+                    "slug": "color-fundus-image",
                     "kind": "Image",
                     "super_kind": "Image",
-                    "relative_path": "images/oct"
+                    "relative_path": "images/color-fundus"
                 }
             },
             {

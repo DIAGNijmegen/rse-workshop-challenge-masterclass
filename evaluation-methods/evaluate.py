@@ -22,11 +22,9 @@ import json
 from glob import glob
 import SimpleITK
 import numpy as np
-import random
 from statistics import mean
 from pathlib import Path
 from pprint import pformat, pprint
-from helpers import run_prediction_processing
 
 INPUT_DIRECTORY = Path("/input")
 OUTPUT_DIRECTORY = Path("/output")
@@ -52,17 +50,18 @@ def process(job):
     )
 
     # Thirdly, retrieve the input file name to match it with your ground truth
-    image_name_oct_image = get_image_name(
+    image_name_color_fundus_image = get_image_name(
         values=job["inputs"],
-        slug="oct-image",
+        slug="color-fundus-image",
     )
 
     # Fourthly, load your ground truth
     matching_ground_truth_filename = {
-        "11_oct_image.tif": "01_vessel_segmentation.mha",
-        "12_oct_image.tif": "05_vessel_segmentation.mha",
-        "13_oct_image.tif": "08_vessel_segmentation.mha",
-    }[image_name_oct_image]
+        "11_fundus_image.jpg": "11_vessel_segmentation.mha",
+        "12_fundus_image.jpg": "12_vessel_segmentation.mha",
+        "13_fundus_image.jpg": "13_vessel_segmentation.mha",
+        # Note to self: do NOT forget to add ADDITIONAL uploaded image filenames to ground-truth mappings
+    }[image_name_color_fundus_image]
 
     ground_truth = get_array_from_image(
         image_path=GROUND_TRUTH_DIRECTORY / matching_ground_truth_filename
@@ -95,8 +94,13 @@ def main():
     # Note that the jobs are not in any order!
     # We work that out from predictions.json
 
-    # Use concurrent workers to process the predictions more efficiently
-    metrics["results"] = run_prediction_processing(fn=process, predictions=predictions)
+    processed_results = []
+
+    for job in predictions:
+        result = process(job)
+        processed_results.append(result)
+
+    metrics["results"] = processed_results
 
     # We have the results per prediction, we can aggregate over the results and
     # generate an overall score(s) for this submission
