@@ -39,9 +39,7 @@ else
 fi
 
 echo "=+= (Re)build the container"
-docker build "$SCRIPT_DIR" \
-  --platform=linux/amd64 \
-  --tag $DOCKER_TAG 2>&1
+source "${SCRIPT_DIR}/build.sh" "$DOCKER_TAG"
 
 
 echo "=+= Doing a forward pass"
