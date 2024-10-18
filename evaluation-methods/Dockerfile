@@ -18,11 +18,7 @@ RUN python -m pip install \
     --no-color \
     --requirement /opt/app/requirements.txt
 
-COPY --chown=user:user helpers.py /opt/app/
 COPY --chown=user:user evaluate.py /opt/app/
-
-# Setting this will limit the number of workers used by the evaluate.py
-ENV GRAND_CHALLENGE_MAX_WORKERS=
 
 # Just for the workshop; we make every image completely unique. Bad practice.
 ARG BUILD_VERSION
