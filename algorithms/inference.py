@@ -30,15 +30,9 @@ THRESHOLD = 128
 
 def run():
     ## Read the inputs
-<<<<<<< HEAD
     # Fundus image
     input_fundus_image = load_image(
         location= Path("/input") / "images" / "color-fundus",
-=======
-    # OCT image
-    input_color-fundus-image = load_image(
-        location= Path("/input") / "images" / "oct",
->>>>>>> 7eb80256ee31b6e6cd5d3f7879785a5c423410eb
     )
     # Dummy patient metadata which we will ignore
     # This is just to demonstrate the possibility of having multiple different inputs
@@ -47,14 +41,8 @@ def run():
     )
 
     # Process inputs and generate predictions:
-<<<<<<< HEAD
     # For this example, we will simply convert the image to a binary mask
     output_vessel_segmentation = convert_to_binary_mask(image=input_fundus_image)
-=======
-    # For this example, we will simply convert the image 
-    # to a binary mask by applying some thresholding
-    output_vessel_segmentation = convert_to_binary_mask(image=input_color-fundus-image)
->>>>>>> 7eb80256ee31b6e6cd5d3f7879785a5c423410eb
     
     # Save your output
     write_image_to_file(
