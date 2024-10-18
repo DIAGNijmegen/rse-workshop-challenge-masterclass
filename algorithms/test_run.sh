@@ -10,17 +10,33 @@ DOCKER_NOOP_VOLUME="${DOCKER_TAG}-volume"
 INPUT_DIR="${SCRIPT_DIR}/test/input"
 OUTPUT_DIR="${SCRIPT_DIR}/test/output"
 
+cleanup() {
+    echo "=+=  Cleaning up before exiting..."
+    # Ensure permissions are set correctly on the output
+    # This allows the host user (e.g. you) to access and handle these files
+    docker run --rm \
+      --quiet \
+      --env HOST_UID=`id -u` \
+      --env HOST_GID=`id -g` \
+      --volume "$OUTPUT_DIR":/output \
+      alpine:latest \
+      /bin/sh -c 'chown -R ${HOST_UID}:${HOST_GID} /output'
+}
+
+trap cleanup EXIT
 
 echo "=+= Cleaning up any earlier output"
+
 if [ -d "$OUTPUT_DIR" ]; then
   # Ensure permissions are setup correctly
   # This allows for the Docker user to write to this location
+  cleanup
+
   rm -rf "${OUTPUT_DIR}"/*
   chmod -f o+rwx "$OUTPUT_DIR"
 else
   mkdir -m o+rwx "$OUTPUT_DIR"
 fi
-
 
 echo "=+= (Re)build the container"
 docker build "$SCRIPT_DIR" \
@@ -35,6 +51,7 @@ echo "=+= Doing a forward pass"
 # '--volume <NAME>:/tmp'
 #   is added because on Grand Challenge this directory cannot be used to store permanent files
 docker volume create "$DOCKER_NOOP_VOLUME" > /dev/null
+
 docker run --rm \
     --platform=linux/amd64 \
     --network none \
@@ -42,17 +59,8 @@ docker run --rm \
     --volume "$OUTPUT_DIR":/output \
     --volume "$DOCKER_NOOP_VOLUME":/tmp \
     $DOCKER_TAG
-docker volume rm "$DOCKER_NOOP_VOLUME" > /dev/null
 
-# Ensure permissions are set correctly on the output
-# This allows the host user (e.g. you) to access and handle these files
-docker run --rm \
-    --quiet \
-    --env HOST_UID=`id -u` \
-    --env HOST_GID=`id -g` \
-    --volume "$OUTPUT_DIR":/output \
-    alpine:latest \
-    /bin/sh -c 'chown -R ${HOST_UID}:${HOST_GID} /output'
+docker volume rm "$DOCKER_NOOP_VOLUME" > /dev/null
 
 echo "=+= Wrote results to ${OUTPUT_DIR}"
 

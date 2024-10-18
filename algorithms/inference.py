@@ -18,10 +18,11 @@ Any container that shows the same behavior will do, this is purely an example of
 Happy programming!
 """
 
-import SimpleITK
 import numpy as np
 import json
+import SimpleITK
 from glob import glob
+from uuid import uuid4
 from pathlib import Path
 
 
@@ -29,9 +30,9 @@ THRESHOLD = 128
 
 def run():
     ## Read the inputs
-    # OCT image
-    input_oct_image = load_image(
-        location= Path("/input") / "images" / "oct",
+    # Fundus image
+    input_fundus_image = load_image(
+        location= Path("/input") / "images" / "color-fundus",
     )
     # Dummy patient metadata which we will ignore
     # This is just to demonstrate the possibility of having multiple different inputs
@@ -40,9 +41,8 @@ def run():
     )
 
     # Process inputs and generate predictions:
-    # For this example, we will simply convert the image 
-    # to a binary mask by applying some thresholding
-    output_vessel_segmentation = convert_to_binary_mask(image=input_oct_image)
+    # For this example, we will simply convert the image to a binary mask
+    output_vessel_segmentation = convert_to_binary_mask(image=input_fundus_image)
     
     # Save your output
     write_image_to_file(
@@ -60,9 +60,8 @@ def convert_to_binary_mask(*, image):
         gray_image += SimpleITK.VectorIndexSelectionCast(image, i)
     gray_image /= image.GetNumberOfComponentsPerPixel()
 
-    # Apply thresholding
-    # the resulting image's voxel values 
-    # need to match those defined for the output interface on Grand Challenge 
+    # Apply thresholding to binarize the image 
+    # The resulting image's voxel values need to match those defined for the output interface on Grand Challenge 
     binary_mask = SimpleITK.BinaryThreshold(
         gray_image, 
         lowerThreshold=THRESHOLD, # lower bound of the pixel intensity range that will be considered "inside" the threshold range
@@ -91,10 +90,15 @@ def load_image(*, location):
 
 def write_image_to_file(*, location, image):
     location.mkdir(parents=True, exist_ok=True)
-    suffix = ".mha"
+    # Note that it doesn't matter what filename you give the output image
+    # Grand Challenge will save the output under its own random uuid
+    # Here, we generate a random unique identifier
+    uuid = uuid4()
+    # Grand Challenge expects image outputs to be either in MHA or TIFF format 
+    # Here, we write the image as MHA file
     SimpleITK.WriteImage(
         image,
-        location / f"output{suffix}",
+        location / f"{uuid}.mha",
         useCompression=True,
     )
 
