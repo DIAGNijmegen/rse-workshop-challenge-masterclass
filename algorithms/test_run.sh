@@ -10,27 +10,26 @@ DOCKER_NOOP_VOLUME="${DOCKER_TAG}-volume"
 INPUT_DIR="${SCRIPT_DIR}/test/input"
 OUTPUT_DIR="${SCRIPT_DIR}/test/output"
 
+
 cleanup() {
-    echo "=+=  Cleaning up before exiting..."
+    echo "=+=  Cleaning permissions ..."
     # Ensure permissions are set correctly on the output
     # This allows the host user (e.g. you) to access and handle these files
     docker run --rm \
       --quiet \
-      --env HOST_UID=`id -u` \
-      --env HOST_GID=`id -g` \
       --volume "$OUTPUT_DIR":/output \
-      alpine:latest \
-      /bin/sh -c 'chown -R ${HOST_UID}:${HOST_GID} /output'
+      --entrypoint /bin/sh \
+      $DOCKER_TAG \
+      -c "chmod -R -f o+rwX /output/* || true"
 }
 
-trap cleanup EXIT
+echo "=+= (Re)build the container"
+source "${SCRIPT_DIR}/build.sh" "$DOCKER_TAG"
 
-echo "=+= Cleaning up any earlier output"
 
 if [ -d "$OUTPUT_DIR" ]; then
   # Ensure permissions are setup correctly
   # This allows for the Docker user to write to this location
-  cleanup
 
   rm -rf "${OUTPUT_DIR}"/*
   chmod -f o+rwx "$OUTPUT_DIR"
@@ -38,9 +37,7 @@ else
   mkdir -m o+rwx "$OUTPUT_DIR"
 fi
 
-echo "=+= (Re)build the container"
-source "${SCRIPT_DIR}/build.sh" "$DOCKER_TAG"
-
+trap cleanup EXIT
 
 echo "=+= Doing a forward pass"
 ## Note the extra arguments that are passed here:
