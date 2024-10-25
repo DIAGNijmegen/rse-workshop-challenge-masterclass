@@ -66,8 +66,8 @@ def convert_to_binary_mask(*, image):
         gray_image, 
         lowerThreshold=THRESHOLD, # lower bound of the pixel intensity range that will be considered "inside" the threshold range
         upperThreshold=255, # upper bound of the pixel intensity range that will be considered "inside" the threshold range
-        insideValue=255, # value to assign to pixels that fall within the threshold range
-        outsideValue=0 # value to assign to pixels that fall outside the threshold range
+        insideValue=0, # value to assign to pixels that fall within the threshold range
+        outsideValue=255 # value to assign to pixels that fall outside the threshold range
     )
     
     return binary_mask
