@@ -5,7 +5,7 @@
             {
                 "file": null,
                 "image": {
-                    "name": "11_fundus_image.jpg"
+                    "name": "00_fundus_image.jpg"
                 },
                 "value": null,
                 "interface": {
@@ -32,100 +32,6 @@
                 "file": null,
                 "image": {
                     "name": "87619887-7cd9-4806-a4a4-7d295c418480.mha"
-                },
-                "value": null,
-                "interface": {
-                    "slug": "binary-vessel-segmentation",
-                    "kind": "Segmentation",
-                    "super_kind": "Image",
-                    "relative_path": "images/binary-vessel-segmentation"
-                }
-            }
-        ],
-        "status": "Succeeded",
-        "started_at": "2023-11-29T10:31:25.691799Z",
-        "completed_at": "2023-11-29T10:31:50.691799Z"
-    },
-    {
-        "pk": "8724c703-f3b0-42df-9e0c-2dd068139b6b",
-        "inputs": [
-            {
-                "file": null,
-                "image": {
-                    "name": "12_fundus_image.jpg"
-                },
-                "value": null,
-                "interface": {
-                    "slug": "color-fundus-image",
-                    "kind": "Image",
-                    "super_kind": "Image",
-                    "relative_path": "images/color-fundus"
-                }
-            },
-            {
-                "file": null,
-                "image": null,
-                "value": 500,
-                "interface": {
-                    "slug": "age-in-months",
-                    "kind": "Integer",
-                    "super_kind": "Value",
-                    "relative_path": "age-in-months.json"
-                }
-            }
-        ],
-        "outputs": [
-            {
-                "file": null,
-                "image": {
-                    "name": "f760fe65-53e9-4d4d-b4b1-2d7377f08c32.mha"
-                },
-                "value": null,
-                "interface": {
-                    "slug": "binary-vessel-segmentation",
-                    "kind": "Segmentation",
-                    "super_kind": "Image",
-                    "relative_path": "images/binary-vessel-segmentation"
-                }
-            }
-        ],
-        "status": "Succeeded",
-        "started_at": "2023-11-29T10:31:25.691799Z",
-        "completed_at": "2023-11-29T10:31:50.691799Z"
-    },
-    {
-        "pk": "62105f92-6b75-44d9-b13e-b5bb5f47f56a",
-        "inputs": [
-            {
-                "file": null,
-                "image": {
-                    "name": "13_fundus_image.jpg"
-                },
-                "value": null,
-                "interface": {
-                    "slug": "color-fundus-image",
-                    "kind": "Image",
-                    "super_kind": "Image",
-                    "relative_path": "images/color-fundus"
-                }
-            },
-            {
-                "file": null,
-                "image": null,
-                "value": 100,
-                "interface": {
-                    "slug": "age-in-months",
-                    "kind": "Integer",
-                    "super_kind": "Value",
-                    "relative_path": "age-in-months.json"
-                }
-            }
-        ],
-        "outputs": [
-            {
-                "file": null,
-                "image": {
-                    "name": "3fb2a46a-210f-46b5-b20f-be2f119e5554.mha"
                 },
                 "value": null,
                 "interface": {

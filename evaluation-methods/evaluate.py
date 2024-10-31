@@ -57,9 +57,7 @@ def process(job):
 
     # Fourthly, load your ground truth
     matching_ground_truth_filename = {
-        "11_fundus_image.jpg": "11_vessel_segmentation.mha",
-        "12_fundus_image.jpg": "12_vessel_segmentation.mha",
-        "13_fundus_image.jpg": "13_vessel_segmentation.mha",
+        "00_fundus_image.jpg": "00_vessel_segmentation.mha",
         # Note to self: do NOT forget to add ADDITIONAL uploaded image filenames to ground-truth mappings
     }[image_name_color_fundus_image]
 
